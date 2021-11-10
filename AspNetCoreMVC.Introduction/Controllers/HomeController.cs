@@ -67,5 +67,16 @@ namespace AspNetCoreMVC.Introduction.Controllers
             return RedirectToRoute("default");
         }
 
+        public JsonResult Index9()
+        {
+            List<Employee> employees = new List<Employee>
+            {
+                new Employee{Id=1,FirstName="Ünsal",LastName="Şentürk",CityId=34},
+                new Employee{Id=2,FirstName="Yunus",LastName="Şentürk",CityId=34},
+                new Employee{Id=3,FirstName="Emre",LastName="Şentürk",CityId=34}
+            };
+
+            return Json(employees);
+        }
     }
 }
