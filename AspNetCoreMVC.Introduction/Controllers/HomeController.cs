@@ -78,5 +78,24 @@ namespace AspNetCoreMVC.Introduction.Controllers
 
             return Json(employees);
         }
+
+        public IActionResult RazorDemo()
+        {
+            List<Employee> employees = new List<Employee>
+            {
+                new Employee{Id=1,FirstName="Ünsal",LastName="Şentürk",CityId=34},
+                new Employee{Id=2,FirstName="Yunus",LastName="Şentürk",CityId=34},
+                new Employee{Id=3,FirstName="Emre",LastName="Şentürk",CityId=34}
+            };
+
+            List<string> cities = new List<string> { "İstanbul", "Ankara" };
+
+            var model = new EmployeeListViewModel
+            {
+                Employees = employees,
+                cities = cities
+            };
+            return View(model);
+        }
     }
 }
