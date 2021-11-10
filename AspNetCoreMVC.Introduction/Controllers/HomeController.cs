@@ -37,5 +37,19 @@ namespace AspNetCoreMVC.Introduction.Controllers
             };
             return View(model);
         }
+
+        public StatusCodeResult Index4()
+        {
+            //return StatusCode(200);
+            return Ok();
+        }
+
+        public StatusCodeResult Index5()
+        {
+            //return StatusCode(400);
+            //return BadRequest();
+            
+            return NotFound();
+        }
     }
 }
