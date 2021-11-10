@@ -51,5 +51,21 @@ namespace AspNetCoreMVC.Introduction.Controllers
             
             return NotFound();
         }
+
+        public RedirectResult Index6()
+        {
+            return Redirect("/Home/Index3");
+        }
+        public IActionResult Index7()
+        {
+            // En çok kullanılan
+            return RedirectToAction("Index2");
+        }
+        public IActionResult Index8()
+        {
+            // Startup.cs dosyasındaki route ismi
+            return RedirectToRoute("default");
+        }
+
     }
 }
