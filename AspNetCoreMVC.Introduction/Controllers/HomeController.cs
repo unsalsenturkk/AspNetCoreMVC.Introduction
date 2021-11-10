@@ -12,5 +12,10 @@ namespace AspNetCoreMVC.Introduction.Controllers
         {
             return "Hello from first application";
         }
+
+        public ViewResult Index2()
+        {
+            return View();
+        }
     }
 }
