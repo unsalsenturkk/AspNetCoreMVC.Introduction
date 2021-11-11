@@ -48,5 +48,59 @@
     }
     <p>@number</p>
 
+    @if (number < 10)
+    {
+        <p> Your number is less than 10</p>
+    }
+    else if (number == 10)
+    {
+        <p>Your number 10</p>
+    }
+    else
+    {
+        <p>Your number greater than 10</p>
+    }
+
+    @switch (number)
+    {
+        case 10:
+            <p>Your number is 10</p>
+            break;
+        case 11:
+            <p>Your number is 11</p>
+            break;
+        case 12:
+            <p>Your number is 12</p>
+            break;
+        default:
+            <p>I have no idea about the number</p>
+            break;
+    }
+
+    @try
+    {
+
+    }
+    catch (ArgumentNullException argumentNullException)
+    {
+
+        throw;
+    }
+    catch (Exception)
+    {
+
+        throw;
+    }
+    finally
+    {
+
+    }
+
+    @using (Html.BeginForm())
+    {
+        <input type="text" id="" name="name" value="" />
+        <button type="submit"></button>
+    }
+
 </body>
 </html>
