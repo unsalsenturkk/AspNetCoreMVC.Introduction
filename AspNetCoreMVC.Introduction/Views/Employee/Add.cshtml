@@ -1,17 +1,10 @@
 ﻿@model AspNetCoreMVC.Introduction.EmployeeAddViewModel;
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Add</title>
-</head>
-<body>
     <form asp-controller="Employee" asp-action="Add">
         <label asp-for="Employee.Id"></label><input asp-for="Employee.Id" /> <br />
         <label asp-for="Employee.FirstName"></label><input asp-for="Employee.FirstName" /> <br />
@@ -25,5 +18,4 @@
     <br />
 
     <employee-list count="2"></employee-list>
-</body>
-</html>
+
