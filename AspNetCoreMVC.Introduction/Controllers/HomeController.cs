@@ -97,5 +97,24 @@ namespace AspNetCoreMVC.Introduction.Controllers
             };
             return View(model);
         }
+
+        //model binding
+        public JsonResult Index10(string key)
+        {
+            List<Employee> employees = new List<Employee>
+            {
+                new Employee{Id=1,FirstName="Ünsal",LastName="Şentürk",CityId=34},
+                new Employee{Id=2,FirstName="Yunus",LastName="Şentürk",CityId=34},
+                new Employee{Id=3,FirstName="Emre",LastName="Şentürk",CityId=34}
+            };
+
+            if (String.IsNullOrEmpty(key))
+            {
+                return  Json(employees);
+            }
+            var result = employees.Where(e => e.FirstName.ToLower().Contains(key));
+
+            return Json(result);
+        }
     }
 }
