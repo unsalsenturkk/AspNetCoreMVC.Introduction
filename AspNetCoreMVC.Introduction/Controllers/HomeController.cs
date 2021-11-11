@@ -116,5 +116,11 @@ namespace AspNetCoreMVC.Introduction.Controllers
 
             return Json(result);
         }
+
+        public ViewResult EmployeeForm()
+        {
+
+            return View();
+        }
     }
 }
