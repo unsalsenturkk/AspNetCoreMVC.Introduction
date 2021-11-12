@@ -1,4 +1,5 @@
 ﻿using AspNetCoreMVC.Introduction.Entities;
+using AspNetCoreMVC.Introduction.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -10,6 +11,12 @@ namespace AspNetCoreMVC.Introduction.Controllers
 {
     public class EmployeeController : Controller
     {
+        private ICalculator _calculator;
+
+        public EmployeeController(ICalculator calculator)
+        {
+            _calculator = calculator;
+        }
         public IActionResult Add()
         {
             var employeeAddViewModel = new EmployeeAddViewModel
@@ -20,7 +27,7 @@ namespace AspNetCoreMVC.Introduction.Controllers
                     new SelectListItem{Text="Ankara",Value="6" },
                     new SelectListItem{Text="İstanbul",Value="34" },
                 }
-                
+
             };
             return View(employeeAddViewModel);
         }
@@ -29,6 +36,11 @@ namespace AspNetCoreMVC.Introduction.Controllers
         public IActionResult Add(Employee employee)
         {
             return View();
+        }
+
+        public string Calculate()
+        {
+            return _calculator.Calculate(100).ToString();
         }
     }
 }
