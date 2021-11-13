@@ -1,8 +1,10 @@
+using AspNetCoreMVC.Introduction.Models;
 using AspNetCoreMVC.Introduction.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
@@ -20,9 +22,10 @@ namespace AspNetCoreMVC.Introduction
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => options.EnableEndpointRouting = false);
-           
-            services.AddScoped<ICalculator, Calculator18>();
+            services.AddMvc(options => options.EnableEndpointRouting = false);           
+            var connection = @"Server=(localdb)\MSSQLLocalDB; Database=SchoolDb; Trusted_Connection=true";
+            services.AddDbContext<SchoolContext>(options => options.UseSqlServer(connection));
+            services.AddTransient<ICalculator, Calculator18>();
         
         }
 
