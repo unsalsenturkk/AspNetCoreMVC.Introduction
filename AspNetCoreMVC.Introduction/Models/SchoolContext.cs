@@ -9,9 +9,9 @@ namespace AspNetCoreMVC.Introduction.Models
 {
     public class SchoolContext:DbContext
     {
-        public SchoolContext(DbContextOptions<SchoolContext> options) : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=SchoolDb;Trusted_Connection=true");
         }
 
         public DbSet<Student> Students { get; set; }
