@@ -9,8 +9,10 @@ namespace AspNetCoreMVC.Introduction.Pages.Customer
 {
     public class IndexModel : PageModel
     {
+        public string Message { get; set; }
         public void OnGet()
         {
+            Message += "Date is " + DateTime.Now.ToString();
         }
     }
 }
