@@ -23,8 +23,15 @@ namespace AspNetCoreMVC.Introduction
         public void ConfigureServices(IServiceCollection services)
         {
           
-            services.AddMvc(options => options.EnableEndpointRouting = false);           
-           
+            services.AddMvc(options => options.EnableEndpointRouting = false);
+            
+            services.AddConnections();
+            services.AddDbContext<SchoolContext>(options =>
+              options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=SchoolDb;Trusted_Connection=true"));
+          
+            services.AddMvc()
+                     .AddControllersAsServices();
+            services.AddControllers().AddControllersAsServices();
             services.AddTransient<ICalculator, Calculator18>();
         
         }
@@ -37,11 +44,11 @@ namespace AspNetCoreMVC.Introduction
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseStaticFiles(new StaticFileOptions
-            { 
-            FileProvider=new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"lib")),
-            RequestPath="/lib"
-            });
+            //app.UseStaticFiles(new StaticFileOptions
+            //{ 
+            //FileProvider=new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"lib")),
+            //RequestPath="/lib"
+            //});
 
             //app.UseMvc(routes =>
             //{
