@@ -19,6 +19,8 @@ namespace AspNetCoreMVC.Introduction.ViewComponents
 
         public ViewViewComponentResult Invoke(string filter)
         {
+            filter = HttpContext.Request.Query["filter"];
+
             return View(new StudentListViewModel
             {
                 Students = _context.Students.Where(s => s.FirstName.ToLower().Contains(filter)).ToList()
