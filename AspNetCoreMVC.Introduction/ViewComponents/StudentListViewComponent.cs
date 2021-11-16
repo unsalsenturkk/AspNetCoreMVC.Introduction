@@ -17,11 +17,11 @@ namespace AspNetCoreMVC.Introduction.ViewComponents
             _context = context;
         }
 
-        public ViewViewComponentResult Invoke()
+        public ViewViewComponentResult Invoke(string filter)
         {
             return View(new StudentListViewModel
             {
-                Students = _context.Students.ToList()
+                Students = _context.Students.Where(s => s.FirstName.ToLower().Contains(filter)).ToList()
             }); ;
         }
     }
