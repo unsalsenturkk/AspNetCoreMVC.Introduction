@@ -1,4 +1,5 @@
 ﻿using AspNetCoreMVC.Introduction.Entities;
+using AspNetCoreMVC.Introduction.Filters;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace AspNetCoreMVC.Introduction.Controllers
             return "Hello from first application";
         }
 
+        [HandleException]
         public ViewResult Index2()
         {
             throw new Exception("Some exception occured!");
