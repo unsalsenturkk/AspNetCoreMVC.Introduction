@@ -35,7 +35,7 @@ namespace AspNetCoreMVC.Introduction
             services.AddTransient<ICalculator, Calculator18>();
 
             services.AddSession();
-
+            services.AddDistributedMemoryCache();
         
         }
 
@@ -51,6 +51,8 @@ namespace AspNetCoreMVC.Introduction
             {
                 app.UseExceptionHandler("/error");
             }
+
+            app.UseSession();
 
             //app.UseStaticFiles(new StaticFileOptions
             //{ 
