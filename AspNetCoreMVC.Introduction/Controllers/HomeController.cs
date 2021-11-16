@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Threading.Tasks;
 
 namespace AspNetCoreMVC.Introduction.Controllers
@@ -15,10 +16,11 @@ namespace AspNetCoreMVC.Introduction.Controllers
             return "Hello from first application";
         }
 
-        [HandleException]
+        [HandleException(ViewName = "DividByZeroError",ExectionType = typeof(DivideByZeroException))]
+        [HandleException(ViewName = "Error", ExectionType = typeof(SecurityException))]
         public ViewResult Index2()
         {
-            throw new Exception("Some exception occured!");
+            throw new SecurityException();
             return View();
         }
 
