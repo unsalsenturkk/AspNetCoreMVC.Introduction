@@ -33,6 +33,9 @@ namespace AspNetCoreMVC.Introduction
                      .AddControllersAsServices();
             services.AddControllers().AddControllersAsServices();
             services.AddTransient<ICalculator, Calculator18>();
+
+            services.AddSession();
+
         
         }
 
