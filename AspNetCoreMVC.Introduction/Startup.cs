@@ -75,6 +75,13 @@ namespace AspNetCoreMVC.Introduction
         {
             routeBuilder.MapRoute("Default", "{controller=Filter}/{action=Index}/{id?}");
             routeBuilder.MapRoute("MyRoute", "Engin/{controller=Home}/{action=Index3}/{id?}");
+
+
+            routeBuilder.MapRoute(
+                  name: "areas",
+                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+
         }
     }
 }
