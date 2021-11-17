@@ -39,6 +39,9 @@ namespace AspNetCoreMVC.Introduction
             services.AddDbContext<SchoolContext>(options =>
               options.UseSqlServer(_configuration["DbConnection"]));
 
+            services.AddDbContext<AppIdentityDbContext>(options =>
+              options.UseSqlServer(_configuration["DbConnection"]));
+
             services.AddIdentity<AppIdentityUser, AppIdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
@@ -91,7 +94,7 @@ namespace AspNetCoreMVC.Introduction
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            env.EnvironmentName = Microsoft.AspNetCore.Hosting.EnvironmentName.Production;
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
