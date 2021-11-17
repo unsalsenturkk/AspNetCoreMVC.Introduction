@@ -65,5 +65,41 @@ namespace AspNetCoreMVC.Introduction.Controllers
         {
             return View();
         }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(registerViewModel);
+            }
+
+            var user = new AppIdentityUser
+            {
+                UserName = registerViewModel.UserName,
+                Email = registerViewModel.Email,
+                Age = registerViewModel.Age                
+            };
+
+            var result = await _userManager.CreateAsync(user, registerViewModel.Password);
+
+            if (result.Succeeded)
+            {
+                var confirmationCode = _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                var callBackUrl = Url.Action("ConfirmEmail", "Security", new { userId = user.Id, code = confirmationCode });
+
+                //Send Email
+
+                return RedirectToAction("Index", "Student");               
+            }
+
+            return View(registerViewModel);
+        }
     }
 }
