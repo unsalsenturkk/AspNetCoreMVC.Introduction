@@ -54,5 +54,16 @@ namespace AspNetCoreMVC.Introduction.Controllers
             return View(loginViewModel);
 
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Student");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }
