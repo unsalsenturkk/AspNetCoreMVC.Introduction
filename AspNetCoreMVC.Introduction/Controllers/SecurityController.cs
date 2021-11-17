@@ -92,7 +92,7 @@ namespace AspNetCoreMVC.Introduction.Controllers
             {
                 var confirmationCode = _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                var callBackUrl = Url.Action("ConfirmEmail", "Security", new { userId = user.Id, code = confirmationCode });
+                var callBackUrl = Url.Action("ConfirmEmail", "Security", new { userId = user.Id, code = confirmationCode.Result });
 
                 //Send Email
 
