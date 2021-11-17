@@ -101,5 +101,27 @@ namespace AspNetCoreMVC.Introduction.Controllers
 
             return View(registerViewModel);
         }
+
+        public async Task<IActionResult> ConfirmEmail(string userId,string code)
+        {
+            if (userId == null || code == null)
+            {
+                return RedirectToAction("Index", "Student");
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new ApplicationException("Unable to find the user");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            if (result.Succeeded)
+            {
+                return View("ConfirmEmail");
+            }
+
+            return RedirectToAction("Index","Student")
+        }
     }
 }
