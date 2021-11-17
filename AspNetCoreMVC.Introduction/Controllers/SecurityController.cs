@@ -121,7 +121,7 @@ namespace AspNetCoreMVC.Introduction.Controllers
                 return View("ConfirmEmail");
             }
 
-            return RedirectToAction("Index","Student")
+            return RedirectToAction("Index", "Student");
         }
 
         public IActionResult ForgotPassword()
