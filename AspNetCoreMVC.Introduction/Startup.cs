@@ -61,9 +61,26 @@ namespace AspNetCoreMVC.Introduction
 
             });
 
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Security/Login";
+                options.LogoutPath = "/Security/Logout";
+                options.AccessDeniedPath = "/Security/AccessDenied";
+                options.SlidingExpiration = true;
+
+                options.Cookie = new CookieBuilder
+                {
+                    HttpOnly = true,
+                    Name =".AspNetCoreDemo.Security.Cookie",
+                    Path = "/",
+                    SameSite = SameSiteMode.Strict
+                };
+            });
+
             services.AddMvc()
                      .AddControllersAsServices();
-            services.AddControllers().AddControllersAsServices();
+            services.AddControllers().AddControllersAsServices();                  
             services.AddTransient<ICalculator, Calculator18>();
 
             services.AddSession();
@@ -85,6 +102,8 @@ namespace AspNetCoreMVC.Introduction
             }
 
             app.UseSession();
+
+            app.UseAuthentication();
 
             //app.UseStaticFiles(new StaticFileOptions
             //{ 
