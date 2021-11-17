@@ -1,8 +1,10 @@
+using AspNetCoreMVC.Introduction.Identity;
 using AspNetCoreMVC.Introduction.Models;
 using AspNetCoreMVC.Introduction.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -36,7 +38,29 @@ namespace AspNetCoreMVC.Introduction
             services.AddConnections();
             services.AddDbContext<SchoolContext>(options =>
               options.UseSqlServer(_configuration["DbConnection"]));
-          
+
+            services.AddIdentity<AppIdentityUser, AppIdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.AllowedForNewUsers = true;
+
+                options.User.RequireUniqueEmail = true;
+
+                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+
+            });
+
             services.AddMvc()
                      .AddControllersAsServices();
             services.AddControllers().AddControllersAsServices();
