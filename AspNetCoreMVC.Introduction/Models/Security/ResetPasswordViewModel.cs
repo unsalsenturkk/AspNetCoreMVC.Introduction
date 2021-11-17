@@ -18,6 +18,6 @@ namespace AspNetCoreMVC.Introduction.Models.Security
         public string Password { get; set; }
         [Required]
         [DataType(DataType.Password)]
-        public string ConfirmedPassword { get; set; }
+        public string ConfirmPassword { get; set; }
     }
 }

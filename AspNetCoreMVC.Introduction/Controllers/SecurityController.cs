@@ -149,10 +149,10 @@ namespace AspNetCoreMVC.Introduction.Controllers
 
             //send callback url with email
 
-            return RedirectToAction("ForgetPasswordEmailSent");
+            return RedirectToAction("ForgotPasswordEmailSent");
         }
 
-        public IActionResult ForgetPasswordEmailSent()
+        public IActionResult ForgotPasswordEmailSent()
         {
             return View();
         }
