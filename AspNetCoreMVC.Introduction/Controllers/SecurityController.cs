@@ -123,5 +123,38 @@ namespace AspNetCoreMVC.Introduction.Controllers
 
             return RedirectToAction("Index","Student")
         }
+
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return View();
+            }
+
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return View();
+            }
+
+            var confirmationCode = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var callBackUrl = Url.Action("ResetPassword", "Security", new { userId = user.Id, code = confirmationCode });
+
+            //send callback url with email
+
+            return RedirectToAction("ForgetPasswordEmailSent");
+        }
+
+        public IActionResult ForgetPasswordEmailSent()
+        {
+            return View();
+        }
     }
 }
