@@ -156,5 +156,46 @@ namespace AspNetCoreMVC.Introduction.Controllers
         {
             return View();
         }
+
+        public IActionResult ResetPassword(string userId,string code)
+        {
+            if (userId == null || code == null)
+            {
+                throw new ApplicationException("User Id or Code must be supplied for password reset");
+            }
+
+            var model = new ResetPasswordViewModel { Code = code };
+            return View(model);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel resetPasswordViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(resetPasswordViewModel);
+            }
+
+            var user = await _userManager.FindByEmailAsync(resetPasswordViewModel.Email);
+            if (user == null)
+            {
+                throw new ApplicationException("User not found");
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, resetPasswordViewModel.Code, resetPasswordViewModel.Password);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ResetPasswordConfirm");
+            }
+
+            return View();
+        }
+
+        public IActionResult ResetPasswordConfirm()
+        {
+            return View();
+        }
     }
 }
