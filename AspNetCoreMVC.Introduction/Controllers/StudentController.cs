@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreMVC.Introduction.Entities;
 using AspNetCoreMVC.Introduction.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetCoreMVC.Introduction.Controllers
 {
@@ -19,6 +20,7 @@ namespace AspNetCoreMVC.Introduction.Controllers
             _context = context;
         }
 
+        [Authorize]
         // GET: Student
         public async Task<IActionResult> Index()
         {
